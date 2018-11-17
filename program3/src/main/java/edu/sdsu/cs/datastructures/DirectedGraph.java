@@ -3,17 +3,49 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/9/18
+ * Date Last Edited: 11/16/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
 
 package edu.sdsu.cs.datastructures;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class DirectedGraph<V> implements IGraph<V> {
+
+    private class Vertex<V> {
+        V label;
+        List<Vertex> neighbors;
+
+        public Vertex(V label) {
+            this.label = label;
+            neighbors = new LinkedList<>();
+        }
+
+    }
+
+    private class Edge {
+        Vertex source, destination;
+        int weight;
+
+        public Edge(V source, V destination) {
+            this.source = getVertex(source);
+            this.destination = getVertex(destination);
+            weight = 1;
+        }
+
+    }
+    /*
+    Given a label grab vertex obj from graph
+     */
+    private Vertex getVertex(V label) {
+        //todo
+        return null;
+    }
+
 
     public DirectedGraph() {
 
