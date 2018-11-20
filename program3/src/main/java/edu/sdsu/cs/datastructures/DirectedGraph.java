@@ -3,7 +3,7 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/16/18
+ * Date Last Edited: 11/19/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
@@ -25,29 +25,33 @@ public class DirectedGraph<V> implements IGraph<V> {
             neighbors = new LinkedList<>();
         }
 
-    }
+        public void addEdge(V destination) {
+            // if (!contains(destination))
+            //  return;
+            Vertex dest = findVertex(destination);
+            
+            neighbors.add(dest);
 
-    private class Edge {
-        Vertex source, destination;
-        int weight;
+        }
 
-        public Edge(V source, V destination) {
-            this.source = getVertex(source);
-            this.destination = getVertex(destination);
-            weight = 1;
+        public Vertex findVertex(V label) {
+            //todo
+            // contains(label) ?
+            // List = verticies();
+            // return foundVertex
+            return null;
         }
 
     }
-    /*
-    Given a label grab vertex obj from graph
-     */
-    private Vertex getVertex(V label) {
-        //todo
-        return null;
-    }
+
+    private List<Vertex> verticies;//add All verticies to this
+    private int size;
+
 
 
     public DirectedGraph() {
+        verticies = new LinkedList<>();
+        size = 0;
 
     }
 
@@ -58,8 +62,9 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @param vertexName The label to associate with the vertex
      */
     @Override
-    public void add(Object vertexName) {
-
+    public void add(V vertexName) {
+        verticies.add(new Vertex(vertexName));
+        size++;
     }
 
     /**
@@ -71,7 +76,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public void connect(Object start, Object destination) {
+    public void connect(V start, V destination) {
 
     }
 
@@ -91,7 +96,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @return true if within the graph, false if not.
      */
     @Override
-    public boolean contains(Object label) {
+    public boolean contains(V label) {
         return false;
     }
 
@@ -103,7 +108,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public void disconnect(Object start, Object destination) {
+    public void disconnect(V start, V destination) {
 
     }
 
@@ -120,7 +125,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public boolean isConnected(Object start, Object destination) {
+    public boolean isConnected(V start, V destination) {
         return false;
     }
 
@@ -137,7 +142,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if the vertex is not present in the graph
      */
     @Override
-    public Iterable neighbors(Object vertexName) {
+    public Iterable neighbors(V vertexName) {
         return null;
     }
 
@@ -154,8 +159,8 @@ public class DirectedGraph<V> implements IGraph<V> {
      *                                is not present in this graph
      */
     @Override
-    public void remove(Object vertexName) {
-
+    public void remove(V vertexName) {
+        size--;
     }
 
     /**
@@ -172,7 +177,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public List shortestPath(Object start, Object destination) {
+    public List shortestPath(V start, V destination) {
         return null;
     }
 
@@ -183,7 +188,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     /**
@@ -193,7 +198,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public Iterable vertices() {
-        return null;
+        return verticies;
     }
 
     /**
@@ -206,7 +211,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if the origin vertex is not present in this graph
      */
     @Override
-    public IGraph connectedGraph(Object origin) {
+    public IGraph connectedGraph(V origin) {
         return null;
     }
 }
