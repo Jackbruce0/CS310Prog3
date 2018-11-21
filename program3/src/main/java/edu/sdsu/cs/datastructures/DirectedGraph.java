@@ -3,7 +3,7 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/19/18
+ * Date Last Edited: 11/21/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
@@ -16,41 +16,46 @@ import java.util.NoSuchElementException;
 
 public class DirectedGraph<V> implements IGraph<V> {
 
-    private class Vertex<V> {
+    private class Vertex {
         V label;
-        List<Vertex> neighbors;
+        List<V> neighbors;
 
         public Vertex(V label) {
             this.label = label;
-            neighbors = new LinkedList<>();
+            this.neighbors = new LinkedList<>();
         }
 
-        public void addEdge(V destination) {
-            // if (!contains(destination))
-            //  return;
-            Vertex dest = findVertex(destination);
-            
-            neighbors.add(dest);
+        public void addEdge(V destination){
+            if (contains(destination))
+                return;
+            neighbors.add(destination);
 
+        }
+
+        public void removeEdge(V destination){
+            if (!contains(destination))
+                return;
+            neighbors.remove(destination);
         }
 
         public Vertex findVertex(V label) {
             //todo
             // contains(label) ?
-            // List = verticies();
+            // List = vertices();
             // return foundVertex
             return null;
         }
 
     }
 
-    private List<Vertex> verticies;//add All verticies to this
+    private List<Vertex> vertices;//add All vertices to this
+    private Vertex graph[][];//may use this instead
     private int size;
 
 
 
     public DirectedGraph() {
-        verticies = new LinkedList<>();
+        vertices = new LinkedList<>();
         size = 0;
 
     }
@@ -63,7 +68,9 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void add(V vertexName) {
-        verticies.add(new Vertex(vertexName));
+        if(vertices.contains(vertexName))
+            return;
+        vertices.add(new Vertex(vertexName));
         size++;
     }
 
@@ -77,7 +84,15 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void connect(V start, V destination) {
-
+        if(!(contains(start)&&contains(destination)))
+            throw new NoSuchElementException();
+        int NX=0;
+        while(!start.equals(vertices.get(NX).label)){
+            NX++;
+        }
+        if(vertices.get(NX).neighbors.contains(destination))
+            return;
+        vertices.get(NX).addEdge(destination);
     }
 
     /**
@@ -85,7 +100,8 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void clear() {
-
+        vertices.clear();
+        size=0;
     }
 
     /**
@@ -97,6 +113,10 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public boolean contains(V label) {
+        for(int NX=0; NX<size; NX++){
+            if(vertices.get(NX).label.equals(label))
+                return true;
+        }
         return false;
     }
 
@@ -109,7 +129,15 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void disconnect(V start, V destination) {
-
+        if(!(contains(start)&&contains(destination)))
+            throw new NoSuchElementException();
+        int NX=0;
+        while(!start.equals(vertices.get(NX).label)){
+            NX++;
+        }
+        if(!vertices.get(NX).neighbors.contains(destination))
+            return;
+        vertices.get(NX).removeEdge(destination);
     }
 
     /**
@@ -142,8 +170,14 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if the vertex is not present in the graph
      */
     @Override
-    public Iterable neighbors(V vertexName) {
-        return null;
+    public Iterable<V> neighbors(V vertexName) {
+        if(!contains(vertexName))
+            throw new NoSuchElementException();
+        int vertexNX=0;
+        while(!vertexName.equals(vertices.get(vertexNX).label)){
+            vertexNX++;
+        }
+        return vertices.get(vertexNX).neighbors;
     }
 
     /**
@@ -197,8 +231,13 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @return The names of the vertices within the graph.
      */
     @Override
-    public Iterable vertices() {
-        return verticies;
+    public Iterable<V> vertices() {
+        List<V> labels = new LinkedList<>();
+
+        for (Vertex vertex : vertices)
+            labels.add(vertex.label);
+
+        return labels;
     }
 
     /**
