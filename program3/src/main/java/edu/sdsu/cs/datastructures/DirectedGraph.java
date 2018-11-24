@@ -3,16 +3,19 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/21/18
+ * Date Last Edited: 11/24/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
 
 package edu.sdsu.cs.datastructures;
 
+
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.PriorityQueue;
 
 public class DirectedGraph<V> implements IGraph<V> {
 
@@ -26,30 +29,20 @@ public class DirectedGraph<V> implements IGraph<V> {
         }
 
         public void addEdge(V destination){
-            if (contains(destination))
+            if (this.neighbors.contains(destination))
                 return;
-            neighbors.add(destination);
+            this.neighbors.add(destination);
 
         }
 
         public void removeEdge(V destination){
-            if (!contains(destination))
+            if (!neighbors.contains(destination))
                 return;
             neighbors.remove(destination);
         }
-
-        public Vertex findVertex(V label) {
-            //todo
-            // contains(label) ?
-            // List = vertices();
-            // return foundVertex
-            return null;
-        }
-
     }
 
     private List<Vertex> vertices;//add All vertices to this
-    private Vertex graph[][];//may use this instead
     private int size;
 
 
@@ -60,6 +53,12 @@ public class DirectedGraph<V> implements IGraph<V> {
 
     }
 
+    private int findVertexNX(V label) {
+        int vertexNX=0;
+        while(!label.equals(vertices.get(vertexNX).label))
+            vertexNX++;
+        return vertexNX;
+    }
     /**
      * Inserts a vertex with the specified name into the Graph if it
      * is not already present.
@@ -68,7 +67,7 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void add(V vertexName) {
-        if(vertices.contains(vertexName))
+        if(contains(vertexName))
             return;
         vertices.add(new Vertex(vertexName));
         size++;
@@ -86,13 +85,10 @@ public class DirectedGraph<V> implements IGraph<V> {
     public void connect(V start, V destination) {
         if(!(contains(start)&&contains(destination)))
             throw new NoSuchElementException();
-        int NX=0;
-        while(!start.equals(vertices.get(NX).label)){
-            NX++;
-        }
-        if(vertices.get(NX).neighbors.contains(destination))
+        int startNX = findVertexNX(start);
+        if(vertices.get(startNX).neighbors.contains(destination))
             return;
-        vertices.get(NX).addEdge(destination);
+        vertices.get(startNX).addEdge(destination);
     }
 
     /**
@@ -131,13 +127,10 @@ public class DirectedGraph<V> implements IGraph<V> {
     public void disconnect(V start, V destination) {
         if(!(contains(start)&&contains(destination)))
             throw new NoSuchElementException();
-        int NX=0;
-        while(!start.equals(vertices.get(NX).label)){
-            NX++;
-        }
-        if(!vertices.get(NX).neighbors.contains(destination))
+        int startNX = findVertexNX(start);
+        if(!vertices.get(startNX).neighbors.contains(destination))
             return;
-        vertices.get(NX).removeEdge(destination);
+        vertices.get(startNX).removeEdge(destination);
     }
 
     /**
@@ -153,8 +146,11 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public boolean isConnected(V start, V destination) {
-        return false;
+    public boolean isConnected(V start, V destination) {//needs work
+        if(!(contains(start)&&contains(destination)))
+            throw new NoSuchElementException();
+        List<V> connectionList = shortestPath(start, destination);
+        return((connectionList.contains(destination))&&connectionList.contains(start));
     }
 
     /**
@@ -173,10 +169,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     public Iterable<V> neighbors(V vertexName) {
         if(!contains(vertexName))
             throw new NoSuchElementException();
-        int vertexNX=0;
-        while(!vertexName.equals(vertices.get(vertexNX).label)){
-            vertexNX++;
-        }
+        int vertexNX= findVertexNX(vertexName);
         return vertices.get(vertexNX).neighbors;
     }
 
@@ -194,6 +187,16 @@ public class DirectedGraph<V> implements IGraph<V> {
      */
     @Override
     public void remove(V vertexName) {
+        if(!contains(vertexName))
+            throw new NoSuchElementException();
+        int vertexNX = findVertexNX(vertexName);
+        for(int verticesNX = 0; verticesNX<size; verticesNX++){
+            for(int neighborNX = 0; neighborNX<vertices.get(verticesNX).neighbors.size(); neighborNX++){
+                if(vertexName.equals(vertices.get(verticesNX).neighbors.get(neighborNX)))
+                    vertices.get(verticesNX).neighbors.remove(neighborNX);
+            }//loops through neighbors
+        }//loops through vertices
+        vertices.remove(vertexNX);
         size--;
     }
 
@@ -211,10 +214,55 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if either vertex are not present in the graph
      */
     @Override
-    public List shortestPath(V start, V destination) {
-        return null;
+    public List<V> shortestPath(V start, V destination) {//THIS NEEDS TO BE REWORKED AS DIJKSTRA'S
+        if(!(contains(start)&&contains(destination)))
+            throw new NoSuchElementException();
+        if(start.equals(destination)) {
+            List<V> emptyList = new LinkedList<>();
+            return emptyList;
+        }
+        List<List<V>> bigList=new LinkedList<>();//creates a list of lists
+        bigList = shortestPathHelper(start, start, destination, bigList, null);
+        PriorityQueue<Integer> p = new PriorityQueue<>();
+        for(int listNX=0; listNX<bigList.size(); listNX++){
+            p.add(bigList.get(listNX).size());
+        }
+        if(p.size()==0) {
+            List<V> emptyList = new LinkedList<>();
+            return emptyList;
+        }
+        int shortestSize = p.remove();
+        int shortestNX=0;
+        while(shortestSize!=bigList.get(shortestNX).size())
+            shortestNX++;
+        return bigList.get(shortestNX);
     }
-
+    private List<List<V>> shortestPathHelper(V vertex, V start, V destination, List<List<V>> bigList, List<V> list){
+        int vertexNX = findVertexNX(vertex);
+        if(list==null) {
+            list = new ArrayList<>();
+            list.add(start);
+        }
+        if(!list.contains(vertex))//so you don't add start twice when a new list is made
+            list.add(vertex);
+        if(!list.contains(destination)) {
+            for (int neighborNX = 0; neighborNX < vertices.get(vertexNX).neighbors.size(); neighborNX++) {
+                if (vertices.get(vertexNX).neighbors.get(neighborNX).equals(destination)){
+                    list.add(vertices.get(vertexNX).neighbors.get(neighborNX));
+                    bigList.add(list);
+                }
+                else if(vertex.equals(start)){
+                    bigList=shortestPathHelper(vertices.get(vertexNX).neighbors.get(neighborNX), start,
+                            destination, bigList, null);
+                }
+                else{
+                    bigList=shortestPathHelper(vertices.get(vertexNX).neighbors.get(neighborNX), start,
+                            destination, bigList, list);
+                }
+            }
+        }
+        return bigList;
+    }
     /**
      * Reports the number of vertices in the Graph.
      *
@@ -250,7 +298,18 @@ public class DirectedGraph<V> implements IGraph<V> {
      * @throws NoSuchElementException if the origin vertex is not present in this graph
      */
     @Override
-    public IGraph connectedGraph(V origin) {
-        return null;
+    public IGraph<V> connectedGraph(V origin) {
+        if(!contains(origin))
+            throw new NoSuchElementException();
+        IGraph<V> connectedGraph = new DirectedGraph<>();
+        int originNX = findVertexNX(origin);
+        connectedGraph.add(vertices.get(originNX).label);
+        for(int NX=0;NX<vertices.size();NX++){
+            if(isConnected(vertices.get(originNX).label,vertices.get(NX).label)) {
+                connectedGraph.add(vertices.get(NX).label);
+                connectedGraph.connect(origin, vertices.get(NX).label);
+            }
+        }
+        return connectedGraph;
     }
 }
