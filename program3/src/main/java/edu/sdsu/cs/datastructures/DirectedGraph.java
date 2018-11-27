@@ -239,13 +239,18 @@ public class DirectedGraph<V> implements IGraph<V> {
     }
     private List<List<V>> shortestPathHelper(V vertex, V start, V destination, List<List<V>> bigList, List<V> list){
         int vertexNX = findVertexNX(vertex);
+        boolean visited = false;
         if(list==null) {
             list = new ArrayList<>();
             list.add(start);
         }
-        if(!list.contains(vertex))//so you don't add start twice when a new list is made
+        for(int bigListNX=0;bigListNX<bigList.size();bigListNX++){
+            if(bigList.get(bigListNX).contains(vertex))
+                visited=true;
+        }
+        if(!list.contains(vertex)&&visited==false)//so you don't add start twice when a new list is made
             list.add(vertex);
-        if(!list.contains(destination)) {
+        if(!list.contains(destination)&&visited==false) {
             for (int neighborNX = 0; neighborNX < vertices.get(vertexNX).neighbors.size(); neighborNX++) {
                 if (vertices.get(vertexNX).neighbors.get(neighborNX).equals(destination)){
                     list.add(vertices.get(vertexNX).neighbors.get(neighborNX));
