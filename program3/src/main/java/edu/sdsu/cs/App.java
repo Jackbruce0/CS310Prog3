@@ -1,9 +1,8 @@
 /*
- * cssc0861
  * Project: program3
- * Created By: Jack Bruce & Jacob Romio
+ * Created By: Jack Bruce - cssc0861,  Jacob Romio - cssc0862
  * Date Created: 11/9/18
- * Date Last Edited: 11/27/18
+ * Date Last Edited: 11/28/18
  * Description: The driver program.
  */
 
@@ -12,9 +11,7 @@ package edu.sdsu.cs;
 import edu.sdsu.cs.datastructures.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,8 +22,6 @@ public class App {
     public static void main( String[] args ) {
         String fileName = "";
         DirectedGraph<String> graph = new DirectedGraph<>();
-
-        //WHAT IS THE DEFAULT FILE PATH IF WE ONLY SEND .src
 
         try {
 

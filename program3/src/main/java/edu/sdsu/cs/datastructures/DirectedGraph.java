@@ -1,9 +1,8 @@
 /*
- * cssc0861
  * Project: program3
- * Created By: Jack Bruce & Jacob Romio
+ * Created By: Jack Bruce - cssc0861,  Jacob Romio - cssc0862
  * Date Created: 11/9/18
- * Date Last Edited: 11/27/18
+ * Date Last Edited: 11/28/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
@@ -35,6 +34,7 @@ public class DirectedGraph<V> implements IGraph<V> {
                 return;
             neighbors.remove(destination);
         }
+
     }
 
     private List<Vertex> vertices;//add All vertices to this
@@ -82,7 +82,6 @@ public class DirectedGraph<V> implements IGraph<V> {
         if (vertices.get(startNX).neighbors.contains(destination))
             return;
         vertices.get(startNX).addEdge(destination);
-
     }
 
     /**
@@ -212,10 +211,10 @@ public class DirectedGraph<V> implements IGraph<V> {
         if (!(contains(start) && contains(destination)))
             throw new NoSuchElementException();
 
-        Map<V, Vertex> unvisited = new TreeMap<>();
-        Map<V, Integer> distances = new TreeMap<>();
+        Map<V, Vertex> unvisited = new TreeMap<>(); //<label, vertex>
+        Map<V, Integer> distances = new TreeMap<>(); //<destination, cost>
         Map<V, V> breadcrumbs = new TreeMap<>(); //<to, from>
-        ArrayList<Vertex> pq = new ArrayList<>();
+        ArrayList<Vertex> q = new ArrayList<>();
         Vertex startVertex = new Vertex(start); //default value should never be used
 
         // initialization
@@ -228,10 +227,9 @@ public class DirectedGraph<V> implements IGraph<V> {
                 distances.put(vertex.label, Integer.MAX_VALUE);
         }
 
-        pq.add(startVertex);
-
-        while (!pq.isEmpty()) {
-            Vertex current = pq.remove(pq.size() - 1);
+        q.add(startVertex);
+        while (!q.isEmpty()) {
+            Vertex current = q.remove(q.size() - 1);
 
             if (!unvisited.containsKey(current.label)) {
                 continue;
@@ -244,9 +242,8 @@ public class DirectedGraph<V> implements IGraph<V> {
                     distances.put(neighbor, 1);
                     breadcrumbs.put(neighbor, current.label);
                 }
-
                 if (unvisited.containsKey(neighbor))
-                    pq.add(unvisited.get(neighbor));
+                    q.add(unvisited.get(neighbor));
             }
         }
 
@@ -254,19 +251,13 @@ public class DirectedGraph<V> implements IGraph<V> {
         V curr = destination;
         shortestPath.push(curr);
         while (!shortestPath.contains(start)) {
-
             if (!breadcrumbs.containsKey(curr)) {
                 shortestPath.clear();
                 break;
             }
-
-
             if (curr.equals(start)) break;
-
             shortestPath.push(breadcrumbs.get(curr));
-
             curr = breadcrumbs.get(curr);
-
         }
 
         List<V> sPathList = new LinkedList<>();
@@ -293,10 +284,8 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public Iterable<V> vertices() {
         List<V> labels = new LinkedList<>();
-
         for (Vertex vertex : vertices)
             labels.add(vertex.label);
-
         return labels;
     }
 
@@ -339,7 +328,6 @@ public class DirectedGraph<V> implements IGraph<V> {
                 vertexStr += "  >> " + neighbor + "\n";
             }
         }
-
         return vertexStr + "\n";
     }
 
@@ -366,7 +354,6 @@ public class DirectedGraph<V> implements IGraph<V> {
                 connections.add(new Connection(vertex, neighborLabel));
             }
         }
-
         return connections;
     }
 
