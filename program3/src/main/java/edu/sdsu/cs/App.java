@@ -3,7 +3,7 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/9/18
+ * Date Last Edited: 11/27/18
  * Description: The driver program.
  */
 
@@ -14,6 +14,7 @@ import edu.sdsu.cs.datastructures.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -79,10 +80,33 @@ public class App {
         as well as the vertices or edges visited along the route.
          */
 
+        //USER INTERFACE SEEMS GOOD... NEED TO FIX SHORTEST PATH FIRST
+//        Scanner userIn = new Scanner(System.in);
+//        System.out.print("Find the shortest path!\nOrigin: ");
+//
+//        String origin = userIn.nextLine();
+//        while (!graph.contains(origin)) {
+//            System.out.println("Graph does not contain " + origin);
+//            origin = userIn.nextLine();
+//        }
+//        System.out.print("Destination: ");
+//        String destination = userIn.nextLine();
+//        while (!graph.contains(destination)) {
+//            System.out.println("Graph does not contain " + destination);
+//            destination = userIn.nextLine();
+//        }
+//
+//        if (!graph.isConnected(origin,destination)) {
+//            System.out.println("There is no path from " + origin + " to " + destination);
+//        }
+
+
+
         /*
         6
         Terminates gracefully and without error
          */
+        System.exit(0);
 
     }
 
@@ -105,14 +129,8 @@ public class App {
                 graph.connect(list.get(0), list.get(1));
             } else
                 graph.add(list.get(0));
-
-            //tests//
-            //System.out.println(list);
-            //System.out.println(list.size());
         }
-
         return graph;
-
     }
 
 }
