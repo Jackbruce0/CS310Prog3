@@ -106,6 +106,8 @@ public class App {
         6
         Terminates gracefully and without error
          */
+
+        System.out.println(graph.shortestPath("An Xuyen", "Kien Giang"));
         System.exit(0);
 
     }
