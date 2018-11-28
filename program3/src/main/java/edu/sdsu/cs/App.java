@@ -31,12 +31,6 @@ public class App {
         this requires multiple runtime configs
         throw an exception if file can't open or it doesn't exist
         */
-//        if (args.length > 0) {
-//            inputFileName = args[0];
-//        } else {
-//            inputFileName="layout.csv";
-//        }
-
 
         try {
 
@@ -113,8 +107,8 @@ public class App {
                 graph.add(list.get(0));
 
             //tests//
-            System.out.println(list);
-            System.out.println(list.size());
+            //System.out.println(list);
+            //System.out.println(list.size());
         }
 
         return graph;
