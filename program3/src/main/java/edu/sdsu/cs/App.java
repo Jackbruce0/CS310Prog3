@@ -26,12 +26,7 @@ public class App {
         String fileName = "";
         DirectedGraph<String> graph = new DirectedGraph<>();
 
-        /*
-        1
-        hard coded name when no argument, and argument .csv file when given argument
-        this requires multiple runtime configs
-        throw an exception if file can't open or it doesn't exist
-        */
+        //WHAT IS THE DEFAULT FILE PATH IF WE ONLY SEND .src
 
         try {
 
@@ -56,58 +51,38 @@ public class App {
             System.exit(0);
         }
 
-        System.out.println(graph); //make a .toString() method
-        //make an if statement checking the number of tokens per line
+        System.out.println(graph);
 
-        /*
-        3
-        Reads in the input file and builds a graph matching the layout expectations.
-        As it encounters a new vertex name, it shall instantiate the vertex and place it in the graph.
-        New vertex names may appear as a single entry in a line,
-        but they may also appear for the first time in a connection
-         */
+        Scanner userIn = new Scanner(System.in);
+        System.out.print("Find the shortest path!\nOrigin: ");
 
-        /*
-        4
-        Displays Information about the Graph (e.g., vertices, connections, degree of each vertex)
-        by printing it to the screen using the object’s toString() method.
-         */
+        String origin = userIn.nextLine();
+        while (!graph.contains(origin)) {
+            System.out.print("Graph does not contain " + origin + ".\nOrigin: ");
+            origin = userIn.nextLine();
+        }
+        System.out.print("Destination: ");
+        String destination = userIn.nextLine();
+        while (!graph.contains(destination)) {
+            System.out.print("Graph does not contain " + destination + ".\nDestination:");
+            destination = userIn.nextLine();
+        }
 
-        /*
-        5
-        Allows the user to select the starting and ending vertices in the graph and computes the
-        shortest path between them. The application shall Display both the distance for the route
-        as well as the vertices or edges visited along the route.
-         */
+        List<String> shortestPath = graph.shortestPath(origin, destination);
+        if (shortestPath.isEmpty())
+            System.out.println("There is no path from " + origin + " to " + destination);
+        else {
+            String pathOutput = "";
+            for (String vertex: shortestPath) {
+                if (vertex.equals(destination))
+                    pathOutput += vertex;
+                else
+                    pathOutput += vertex + " >> ";
+            }
+            System.out.print("The shortest path from " + origin + " to " + destination + " is: " + pathOutput +
+                    "\nDistance: " + (shortestPath.size() - 1));
+        }
 
-        //USER INTERFACE SEEMS GOOD... NEED TO FIX SHORTEST PATH FIRST
-//        Scanner userIn = new Scanner(System.in);
-//        System.out.print("Find the shortest path!\nOrigin: ");
-//
-//        String origin = userIn.nextLine();
-//        while (!graph.contains(origin)) {
-//            System.out.println("Graph does not contain " + origin);
-//            origin = userIn.nextLine();
-//        }
-//        System.out.print("Destination: ");
-//        String destination = userIn.nextLine();
-//        while (!graph.contains(destination)) {
-//            System.out.println("Graph does not contain " + destination);
-//            destination = userIn.nextLine();
-//        }
-//
-//        if (!graph.isConnected(origin,destination)) {
-//            System.out.println("There is no path from " + origin + " to " + destination);
-//        }
-
-
-
-        /*
-        6
-        Terminates gracefully and without error
-         */
-
-        System.out.println(graph.shortestPath("An Xuyen", "Kien Giang"));
         System.exit(0);
 
     }

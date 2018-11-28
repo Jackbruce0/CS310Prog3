@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad53b7bb-6eaf-4699-a551-dcccd1c06eb5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/DirectedGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/DirectedGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -45,18 +43,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5084" />
+          <entry key="JAVA" value="5492" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/sdsu/cs/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="109" column="73" lean-forward="true" selection-start-line="109" selection-start-column="73" selection-end-line="109" selection-end-column="73" />
+            <state relative-caret-position="142">
+              <caret line="28" column="60" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
               <folding>
                 <element signature="e#0#3491#0" expanded="true" />
               </folding>
@@ -87,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
+            <state relative-caret-position="210">
+              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,9 +112,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/IGraph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/DirectedGraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/App.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/DirectedGraph.java" />
       </list>
     </option>
   </component>
@@ -226,7 +224,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543391334233" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543393443867" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -242,7 +240,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DirectedGraphTest">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.sdsu.cs.App" />
       <module name="program3" />
@@ -310,9 +308,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.DirectedGraphTest" />
         <item itemvalue="JUnit.DirectedGraphTest.remove_middleLayer_isConnectedBreaks" />
-        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.DirectedGraphTest.shortestPath_singlePathInGraph_correctSizeAndSequence" />
       </list>
     </recent_temporary>
@@ -337,9 +335,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DirectedGraphTest_remove_middleLayer_isConnectedBreaks - 2018.11.27 at 23h 22m 17s.xml">
-      <configuration name="DirectedGraphTest.remove_middleLayer_isConnectedBreaks" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DirectedGraphTest_remove_middleLayer_isConnectedBreaks - 2018.11.27 at 23h 22m 42s.xml">
       <configuration name="DirectedGraphTest.remove_middleLayer_isConnectedBreaks" configurationId="JUnit" />
     </history-entry>
@@ -367,9 +362,12 @@
     <history-entry file="DirectedGraphTest - 2018.11.27 at 23h 46m 30s.xml">
       <configuration name="DirectedGraphTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="DirectedGraphTest - 2018.11.28 at 00h 09m 48s.xml">
+      <configuration name="DirectedGraphTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19732000" />
+    <option name="totallyTimeSpent" value="21171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -384,7 +382,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19879518" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6168675" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -393,7 +391,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32928476" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32891566" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -456,16 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/sdsu/cs/datastructures/DirectedGraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3765">
@@ -480,10 +468,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/sdsu/cs/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="109" column="73" lean-forward="true" selection-start-line="109" selection-start-column="73" selection-end-line="109" selection-end-column="73" />
+        <state relative-caret-position="142">
+          <caret line="28" column="60" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
           <folding>
             <element signature="e#0#3491#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/sdsu/cs/datastructures/DirectedGraphTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

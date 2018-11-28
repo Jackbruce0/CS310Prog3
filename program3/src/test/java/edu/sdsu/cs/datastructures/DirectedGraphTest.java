@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class DirectedGraphTest {
 
-    private final int DEFAULT_TEST_SIZE = 5000;
+    private final int DEFAULT_TEST_SIZE = 500;
     private final int NODE_INITIAL = 0;
     private final int NODE_FINAL = 200;
     private final int NODE_MISSING = -1;
