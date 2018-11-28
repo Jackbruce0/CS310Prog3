@@ -64,7 +64,7 @@ public class App {
         System.out.print("Destination: ");
         String destination = userIn.nextLine();
         while (!graph.contains(destination)) {
-            System.out.print("Graph does not contain " + destination + ".\nDestination:");
+            System.out.print("Graph does not contain " + destination + ".\nDestination: ");
             destination = userIn.nextLine();
         }
 
