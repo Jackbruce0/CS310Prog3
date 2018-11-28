@@ -13,6 +13,7 @@ import edu.sdsu.cs.datastructures.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +21,9 @@ import java.util.StringTokenizer;
 
 public class App {
 
-    public static void main( String[] args ) throws FileNotFoundException {
-        String inputFileName;
-        IGraph<String> graph = new DirectedGraph<>();
+    public static void main( String[] args ) {
+        String fileName = "";
+        DirectedGraph<String> graph = new DirectedGraph<>();
 
         /*
         1
@@ -30,26 +31,34 @@ public class App {
         this requires multiple runtime configs
         throw an exception if file can't open or it doesn't exist
         */
-        if (args.length > 0) {
-            inputFileName = args[0];
-        } else {
-            inputFileName="layout.csv";
-        }
+//        if (args.length > 0) {
+//            inputFileName = args[0];
+//        } else {
+//            inputFileName="layout.csv";
+//        }
 
-        Scanner scanner = new Scanner(new File(inputFileName));
 
-        while(scanner.hasNext()) {
-            String curLine=scanner.nextLine();
-            StringTokenizer toke = new StringTokenizer(curLine, ",");
-            List<String> list = new LinkedList<>();
-            while(toke.hasMoreTokens())
-                list.add(toke.nextToken());
-            if(list.size()==2)
-                graph.connect(list.get(0),list.get(1));
+        try {
+
+            if (args.length > 0)
+                fileName = args[0];
             else
-                graph.add(list.get(0));
-//            System.out.println(list);
-//            System.out.println(list.size());
+                fileName = "./graphData/layout.csv";
+
+            if(!fileName.endsWith(".csv")) {
+                System.out.println("Error: " + fileName + " does not meet syntax requirements.");
+                System.exit(0);
+            }
+
+            Scanner scanner = new Scanner(new File(fileName));
+
+            graph = buildGraph(scanner);
+
+            scanner.close();
+
+        } catch (IOException e) {
+            System.out.println("Error: Unable to open " + fileName + ". Verify the file exists and is accessible.");
+            System.exit(0);
         }
 
         System.out.println(graph); //make a .toString() method
@@ -80,7 +89,36 @@ public class App {
         6
         Terminates gracefully and without error
          */
-        scanner.close();
+
+    }
+
+    private static DirectedGraph<String> buildGraph(Scanner csvReader) {
+        DirectedGraph<String> graph = new DirectedGraph();
+
+        while(csvReader.hasNext()) {
+            String curLine = csvReader.nextLine();
+            StringTokenizer toke = new StringTokenizer(curLine, ",");
+            List<String> list = new LinkedList<>();
+
+            while(toke.hasMoreTokens())
+                list.add(toke.nextToken());
+
+            if(list.size()==2) {
+                if(!graph.contains(list.get(0)) || !graph.contains(list.get(1))) {
+                    graph.add(list.get(0));
+                    graph.add(list.get(1));
+                }
+                graph.connect(list.get(0), list.get(1));
+            } else
+                graph.add(list.get(0));
+
+            //tests//
+            System.out.println(list);
+            System.out.println(list.size());
+        }
+
+        return graph;
+
     }
 
 }

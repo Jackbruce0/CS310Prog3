@@ -3,7 +3,7 @@
  * Project: program3
  * Created By: Jack Bruce & Jacob Romio
  * Date Created: 11/9/18
- * Date Last Edited: 11/24/18
+ * Date Last Edited: 11/27/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
@@ -22,6 +22,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     private class Vertex {
         V label;
         List<V> neighbors;
+        int degree;
 
         public Vertex(V label) {
             this.label = label;
@@ -32,7 +33,6 @@ public class DirectedGraph<V> implements IGraph<V> {
             if (this.neighbors.contains(destination))
                 return;
             this.neighbors.add(destination);
-
         }
 
         public void removeEdge(V destination){
@@ -44,8 +44,6 @@ public class DirectedGraph<V> implements IGraph<V> {
 
     private List<Vertex> vertices;//add All vertices to this
     private int size;
-
-
 
     public DirectedGraph() {
         vertices = new LinkedList<>();
@@ -89,6 +87,7 @@ public class DirectedGraph<V> implements IGraph<V> {
         if(vertices.get(startNX).neighbors.contains(destination))
             return;
         vertices.get(startNX).addEdge(destination);
+
     }
 
     /**
@@ -317,4 +316,61 @@ public class DirectedGraph<V> implements IGraph<V> {
         }
         return connectedGraph;
     }
+
+    @Override
+    public String toString() {
+        List<Connection> connections = getConnections();
+        calulateDegrees(connections);
+        String vertexStr = "Verticies: " + size + "\n" +
+                "Connections: " + connections.size() + "\n\n";
+
+        int vertexNum = 0;
+        for (Vertex vertex: vertices) {
+            vertexStr += ++vertexNum + ". " + vertex.label + ", degree: " + vertex.degree + "\n";
+            for(V neighbor: vertex.neighbors) {
+                vertexStr += "  >> " + neighbor + "\n";
+            }
+        }
+
+        return vertexStr + "\n";
+    }
+
+    private class Connection {
+        Vertex origin;
+        V destination;
+
+        public Connection(Vertex origin, V destination) {
+            this.origin = origin;
+            this.destination = destination;
+        }
+
+        @Override
+        public String toString() {
+            return origin.label + ", " + destination;
+        }
+
+    }
+
+    private List<Connection> getConnections() {
+        List<Connection> connections = new LinkedList<>();
+        for (Vertex vertex: vertices) {
+            for (V neighborLabel: vertex.neighbors) {
+                connections.add(new Connection(vertex, neighborLabel));
+            }
+        }
+
+        return connections;
+    }
+
+    private void calulateDegrees(List<Connection> connections) {
+        for(Vertex vertex: vertices) {
+            vertex.degree = vertex.neighbors.size(); //outgoing paths add degree
+            for(Connection connection: connections) {
+                if (connection.destination.equals(vertex.label)) { //incomming paths add degree
+                    vertex.degree++;
+                }
+            }
+        }
+    }
+
 }

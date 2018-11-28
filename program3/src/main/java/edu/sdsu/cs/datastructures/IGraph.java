@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <V> The type to use for unique vertex names (e.g. String)
  */
-public interface IGraph<V> {//made public to work with Driver Application
+interface IGraph<V> {//made public to work with Driver Application
     /**
      * Inserts a vertex with the specified name into the Graph if it
      * is not already present.
