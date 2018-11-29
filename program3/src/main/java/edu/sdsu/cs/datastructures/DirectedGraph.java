@@ -214,7 +214,7 @@ public class DirectedGraph<V> implements IGraph<V> {
         Map<V, Vertex> unvisited = new TreeMap<>(); //<label, vertex>
         Map<V, Integer> distances = new TreeMap<>(); //<destination, cost>
         Map<V, V> breadcrumbs = new TreeMap<>(); //<to, from>
-        ArrayList<Vertex> q = new ArrayList<>();
+        Queue<Vertex> q = new LinkedList<>();
         Vertex startVertex = new Vertex(start); //default value should never be used
 
         // initialization
@@ -229,7 +229,7 @@ public class DirectedGraph<V> implements IGraph<V> {
 
         q.add(startVertex);
         while (!q.isEmpty()) {
-            Vertex current = q.remove(q.size() - 1);
+            Vertex current = q.poll();
 
             if (!unvisited.containsKey(current.label)) {
                 continue;
