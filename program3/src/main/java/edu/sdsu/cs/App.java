@@ -2,7 +2,7 @@
  * Project: program3
  * Created By: Jack Bruce - cssc0861,  Jacob Romio - cssc0862
  * Date Created: 11/9/18
- * Date Last Edited: 11/28/18
+ * Date Last Edited: 11/29/18
  * Description: The driver program.
  */
 
@@ -28,7 +28,7 @@ public class App {
             if (args.length > 0)
                 fileName = args[0];
             else
-                fileName = "./graphData/layout.csv";
+                fileName = "./graphData/layout.csv"; //
 
             if(!fileName.endsWith(".csv")) {
                 System.out.println("Error: " + fileName + " does not meet syntax requirements.");

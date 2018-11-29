@@ -2,7 +2,7 @@
  * Project: program3
  * Created By: Jack Bruce - cssc0861,  Jacob Romio - cssc0862
  * Date Created: 11/9/18
- * Date Last Edited: 11/28/18
+ * Date Last Edited: 11/29/18
  * Description: The concrete implementation of a non-weighted, directed graph meeting all the requirements defined in
  * this assignment
  */
@@ -77,7 +77,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public void connect(V start, V destination) {
         if (!(contains(start) && contains(destination)))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
         int startNX = findVertexNX(start);
         if (vertices.get(startNX).neighbors.contains(destination))
             return;
@@ -141,7 +141,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public boolean isConnected(V start, V destination) {//needs work
         if (!(contains(start) && contains(destination)))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
         List<V> connectionList = shortestPath(start, destination);
         return ((connectionList.contains(destination)) && connectionList.contains(start));
     }
@@ -161,7 +161,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public Iterable<V> neighbors(V vertexName) {
         if (!contains(vertexName))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
         int vertexNX = findVertexNX(vertexName);
         return vertices.get(vertexNX).neighbors;
     }
@@ -181,7 +181,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public void remove(V vertexName) {
         if (!contains(vertexName))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
         int vertexNX = findVertexNX(vertexName);
         for (int verticesNX = 0; verticesNX < size; verticesNX++) {
             for (int neighborNX = 0; neighborNX < vertices.get(verticesNX).neighbors.size(); neighborNX++) {
@@ -209,7 +209,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public List<V> shortestPath(V start, V destination) {
         if (!(contains(start) && contains(destination)))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
 
         Map<V, Vertex> unvisited = new TreeMap<>(); //<label, vertex>
         Map<V, Integer> distances = new TreeMap<>(); //<destination, cost>
@@ -301,7 +301,7 @@ public class DirectedGraph<V> implements IGraph<V> {
     @Override
     public IGraph<V> connectedGraph(V origin) {
         if (!contains(origin))
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Vertex not in graph.");
         IGraph<V> connectedGraph = new DirectedGraph<>();
         int originNX = findVertexNX(origin);
         connectedGraph.add(vertices.get(originNX).label);
