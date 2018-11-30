@@ -28,7 +28,7 @@ public class App {
             if (args.length > 0)
                 fileName = args[0];
             else
-                fileName = "./graphData/layout.csv"; //
+                fileName = "./layout.csv";
 
             if(!fileName.endsWith(".csv")) {
                 System.out.println("Error: " + fileName + " does not meet syntax requirements.");
