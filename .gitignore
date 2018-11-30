@@ -32,6 +32,10 @@ hs_err_pid*
 .idea/**/dictionaries
 .idea/**/shelf
 
+#NEW STUFF MIGHT BREAK THINGS
+.idea/**/*.xml
+*.iml
+
 # Generated files
 .idea/**/contentModel.xml
 
